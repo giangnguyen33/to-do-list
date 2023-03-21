@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import styled from '@emotion/styled';
+import TodoList, { Todo } from './components/TodoList';
+import { v4 as uuid } from "uuid";
 
 const Wrapper = styled.div({
   display: "flex",
@@ -19,10 +21,29 @@ const Header = styled.div({
   justifyContent: "center",
 });
 
+const todos: Todo[] = [
+  {
+    id: uuid(),
+    label: "Buy groceries",
+    checked: false,
+  },
+  {
+    id: uuid(),
+    label: "Reboot computer",
+    checked: false,
+  },
+  {
+    id: uuid(),
+    label: "Ace CoderPad interview",
+    checked: true,
+  },
+];
+
 const App = () =>{
   return (
     <Wrapper>
       <Header>Todo List</Header>
+      <TodoList todos={todos}></TodoList>
     </Wrapper>
   );
 }

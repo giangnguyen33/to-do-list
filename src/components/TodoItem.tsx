@@ -33,15 +33,16 @@ const Checkbox = styled.input({
 
   
 interface TodoItemProps {
+    id: string;
     label:string;
     checked: boolean;
-    onChange?: (checked: boolean)=> void;
+    onChange?: (checked: boolean, id:string)=> void;
 }
 
 
-const TodoItem = ({label, checked, onChange}:TodoItemProps)=>{
-    return <Wrapper>
-        <Checkbox type="checkbox" checked={checked} onChange={(e)=>onChange(e.target.checked)}></Checkbox>
+const TodoItem = ({id, label, checked, onChange}:TodoItemProps)=>{
+    return <Wrapper data-testid = {`todo-item-${id}`}>
+        <Checkbox type="checkbox" checked={checked} onChange={(e)=>onChange(e.target.checked, id)}></Checkbox>
         <Label >{label}</Label>
     </Wrapper>
 

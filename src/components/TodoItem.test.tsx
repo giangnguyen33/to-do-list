@@ -4,12 +4,14 @@ import TodoItem from './TodoItem'
 
 describe('TodoItem test',()=>{
     const mockOnChange = jest.fn();
+    const itemId = 'item id';
+    const itemlabel = 'item label';
 
-    const setupTodoItem = () =>  render(<TodoItem label="Item label" checked={true} onChange={mockOnChange}></TodoItem>)
+    const setupTodoItem = () =>  render(<TodoItem id={itemId} label={itemlabel} checked={true} onChange={mockOnChange}></TodoItem>)
    
     it('should render item label',()=>{
         setupTodoItem();
-        expect(screen.getByText('Item label')).toBeInTheDocument();
+        expect(screen.getByText(itemlabel)).toBeInTheDocument();
     })
 
     it('should render checkbox with default value',()=>{
@@ -21,6 +23,6 @@ describe('TodoItem test',()=>{
         setupTodoItem();
         const checkbox = screen.getByRole('checkbox');
         fireEvent.click(checkbox);
-        expect(mockOnChange).toBeCalledWith(false);
+        expect(mockOnChange).toBeCalledWith(false, itemId);
     })
 })
