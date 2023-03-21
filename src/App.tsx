@@ -19,7 +19,7 @@ const Header = styled.div({
   justifyContent: "center",
 });
 
-function App() {
+const App = () =>{
   return (
     <Wrapper>
       <Header>Todo List</Header>
