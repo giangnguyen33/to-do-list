@@ -16,10 +16,17 @@ const checkTodoItem = (todo: Todo)=> {
     }
 }
 
+const clickOncheckBoxTodoItem = (todo: Todo)=> {
+    const item = screen.getByTestId(`todo-item-${todo.id}`);
+    const checkbox = getByRole(item, 'checkbox');
+    fireEvent.click(checkbox);
+}
+
 describe('Todo List test',()=>{
 
   describe('when todo items data in localstorage',()=>{
     const todos = initialData;
+
     beforeEach(()=>{
         setLocalStorage(LOCAL_TODOS_KEY, undefined);
     })
@@ -32,16 +39,15 @@ describe('Todo List test',()=>{
       })
       
     it('should change status of checked  when click on checkbox' ,()=>{
+        const item1 = todos[0];
+        const item3 = todos[2];
         render(<TodoList ></TodoList>)
-        const item1 = screen.getByTestId(`todo-item-${todos[0].id}`);
-        const checkbox1 = getByRole(item1, 'checkbox');
-        fireEvent.click(checkbox1);
-        expect(checkbox1).toBeChecked();
-    
-        const item3 = screen.getByTestId(`todo-item-${todos[2].id}`);
-        const checkbox3= getByRole(item3, 'checkbox');
-        fireEvent.click(checkbox3);
-        expect(checkbox3).not.toBeChecked()
+        clickOncheckBoxTodoItem(item1)
+        checkTodoItem(item1);
+
+        clickOncheckBoxTodoItem(item3)
+        checkTodoItem(item3);
+        
       })
   })
 

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import React, { useCallback, useEffect, useState } from "react";
 import TodoItem from "./TodoItem";
 import { v4 as uuid } from "uuid";
+import {sortBy} from 'lodash'
 
 export const LOCAL_TODOS_KEY = 'todoItems';
 
@@ -54,9 +55,12 @@ const TodoList = () =>{
         if(selectedItem) {
             selectedItem.checked = checked;
         }
-       
-        setItems(todoList);
-        localStorage.setItem(LOCAL_TODOS_KEY, JSON.stringify(items));
+    
+        const sortItems = sortBy(todoList,['checked']);
+
+        setItems(sortItems);
+        localStorage.setItem(LOCAL_TODOS_KEY, JSON.stringify(sortItems));
+        
     },[items])
 
     return <List>
